@@ -17,3 +17,5 @@ More over, this game supports modding!
 - To see some example mods to download, go to [Example Mods](https://github.com/XiaoGeNintendo/SoundGuessGame/wiki/Sample-mods)
 
 - To bored people, go to [Changelog](https://github.com/XiaoGeNintendo/SoundGuessGame/wiki/Changelog) and my other projects!
+
+btw, repacking is used for my jar file. If you have any licence problem(because i never read them) please submit an issue, thx!
