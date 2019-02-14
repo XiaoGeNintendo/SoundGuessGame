@@ -247,13 +247,19 @@ public class SoundGuess {
 		mods.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
 		mods.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
+		JScrollPane jsp1=new JScrollPane(mods);
+		
 		JList<String> creatures=new JList<>();
 		creatures.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
 		creatures.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
+		JScrollPane jsp2=new JScrollPane(creatures);
+		
 		JList<String> resources=new JList<>();
 		resources.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
 		resources.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		JScrollPane jsp3=new JScrollPane(resources);
 		
 		JTextArea display=new JTextArea();
 		display.setEditable(false);
@@ -261,10 +267,12 @@ public class SoundGuess {
 		display.setWrapStyleWord(true);
 		display.setText("Welcome back,"+save.username+"!\nSuccessful Guess By Voice:"+save.correctGuessByVoice+"\nSuccessful Guess By Picture:"+save.correctGuessByPicture);
 		
-		inv.add(mods);
-		inv.add(creatures);
-		inv.add(resources);
-		inv.add(display);
+		JScrollPane jsp4=new JScrollPane(display);
+		
+		inv.add(jsp1);
+		inv.add(jsp2);
+		inv.add(jsp3);
+		inv.add(jsp4);
 
 		inv.setSize(700, 300);
 		inv.setVisible(true);
@@ -360,7 +368,9 @@ public class SoundGuess {
 		JLabel picture=new JLabel();
 		picture.setHorizontalAlignment(SwingConstants.CENTER);
 		picture.setText("Loading picture view...");
-		url.add("Center",picture);
+		
+		JScrollPane jsp=new JScrollPane(picture);
+		url.add("Center",jsp);
 		
 		JButton download=new JButton("Download");
 		url.add("South",download);
@@ -774,7 +784,8 @@ public class SoundGuess {
 		};
 		t.start();
 		
-		voice.add(play);
+		JScrollPane jsp=new JScrollPane(play);
+		voice.add(jsp);
 		
 		JTextField write=new JTextField("");
 		voice.add(write);
@@ -998,7 +1009,8 @@ public class SoundGuess {
 		
 		jl.setListData(vec);
 		
-		settings.add(jl);
+		JScrollPane jsp=new JScrollPane(jl);
+		settings.add(jsp);
 		
 		settings.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		settings.setSize(250, 500);
