@@ -10,6 +10,6 @@ public class UserSave {
 	public int correctGuessByVoice;
 	public int correctGuessByPicture;
 	public Map<String,HashSet<String>> named=new HashMap<>();
-	
+	public Map<String,String> extraData=new HashMap<>();
 	
 }

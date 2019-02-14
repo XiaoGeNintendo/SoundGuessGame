@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -36,6 +35,8 @@ import com.hhs.xiaomao.modloader.MainLoader;
 import javazoom.jl.player.Player;
 
 public class SoundGuess {
+	
+	public final static int build=2;
 	
 	MenuBar menu;
 	Menu guess,inventory,setting,about;
@@ -808,10 +809,13 @@ public class SoundGuess {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(mod.isCorrect(guess, write.getText().trim())){
+				
+				String ret=mod.isCorrect(guess, write.getText().trim());
+				
+				if(ret.startsWith("C")){
 					
 					if(save.acquired.containsKey(mod.getModName()+":"+guess)){
-						msgBox("You caught a "+write.getText()+" again!","Wow!");
+						msgBox("You caught a "+write.getText()+" again!\nComment:"+ret.substring(1),"Wow!");
 						save.named.get(mod.getModName()+":"+guess).add(write.getText());
 						
 					}else{
@@ -831,6 +835,7 @@ public class SoundGuess {
 							msg+="...And more";
 						}
 						
+						msg+="\nComment:"+ret.substring(1);
 						msgBox(msg,"Wow!");
 						
 						
@@ -846,7 +851,11 @@ public class SoundGuess {
 					
 					voice.dispose();
 				}else{
-					msgBox("Wrong Answer...","Try again");
+					if(ret.startsWith("W")){
+						msgBox("Wrong Answer:\n"+ret.substring(1),"Try again");
+					}else{
+						msgBox("Oops.. Something bad happened:\n"+ret.substring(1),"Sorry");
+					}
 				}
 			}
 			
@@ -950,10 +959,13 @@ public class SoundGuess {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(mod.isCorrect(guess, write.getText().trim())){
+				
+				String ret=mod.isCorrect(guess, write.getText().trim());
+				
+				if(ret.startsWith("C")){
 					
 					if(save.acquired.containsKey(mod.getModName()+":"+guess)){
-						msgBox("You caught a "+write.getText()+" again!","Wow!");
+						msgBox("You caught a "+write.getText()+" again!\nComment:"+ret.substring(1),"Wow!");
 						save.named.get(mod.getModName()+":"+guess).add(write.getText());
 						
 					}else{
@@ -973,6 +985,7 @@ public class SoundGuess {
 							msg+="...And more";
 						}
 						
+						msg+="\nComment:"+ret.substring(1);
 						msgBox(msg,"Wow!");
 						
 						
@@ -988,7 +1001,11 @@ public class SoundGuess {
 					
 					voice.dispose();
 				}else{
-					msgBox("Wrong Answer...","Try again");
+					if(ret.startsWith("W")){
+						msgBox("Wrong Answer:\n"+ret.substring(1),"Try again");
+					}else{
+						msgBox("Oops.. Something bad happened:\n"+ret.substring(1),"Sorry");
+					}
 				}
 			}
 			

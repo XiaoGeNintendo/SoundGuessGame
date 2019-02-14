@@ -65,12 +65,15 @@ public abstract class Mod {
 	public abstract Map<String,URL> onAcquired(int id);
 	
 	/**
-	 * The user guessed the name, return whether it is right or not.
+	 * The user guessed the name, return whether it is right or not. <br/>
+	 * The first letter in the string is verdict, then followed by the comment <br/>
+	 * The verdict could be "C" for correct, "W" for wrong answer, "U" for checker internal error <br/>
+	 * For example, "CYou found my name!" will display a line of "You found my name!" and is considered a correct guess <br/>
 	 * @param id
 	 * @param name
 	 * @return
 	 */
-	public abstract boolean isCorrect(int id,String name);
+	public abstract String isCorrect(int id,String name);
 	
 	public boolean supportVoice(){
 		return true;
