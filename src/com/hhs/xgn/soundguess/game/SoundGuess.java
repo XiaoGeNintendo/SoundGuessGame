@@ -35,7 +35,7 @@ import javazoom.jl.player.Player;
 
 public class SoundGuess {
 	
-	public final static int build=3;
+	public final static int build=4;
 	
 	MenuBar menu;
 	Menu guess,inventory,setting,about;
@@ -49,9 +49,11 @@ public class SoundGuess {
 	
 	UserSave save;
 	
+	SoundGuess game;
+	
 	public static void main(String[] args) {
-		SoundGuess x=new SoundGuess();
-		x.start();
+		SoundGuess g=new SoundGuess();
+		g.start();
 	}
 
 
@@ -66,6 +68,9 @@ public class SoundGuess {
 		
 	}
 	public void start(){
+		
+		
+		game=this;
 		
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -645,7 +650,7 @@ public class SoundGuess {
 			case 1:
 				for(Mod md:MainLoader.mods){
 					if(md.getModName().equals(peek)){
-						return "Module name:"+md.getModName()+"\n"+(md.supportVoice()?"Support Voice Guessing":"")+"\n"+(md.supportPicture()?"Support Picture Guessing":"");
+						return "Module name:"+md.getModName()+"\n"+(md.supportVoice(game)?"Support Voice Guessing":"")+"\n"+(md.supportPicture(game)?"Support Picture Guessing":"");
 					}
 				}
 				return "Unknown Module Name "+peek;
@@ -701,7 +706,7 @@ public class SoundGuess {
 	public void soundGuess(){
 		ArrayList<Mod> ok=new ArrayList<>();
 		for(Mod md:MainLoader.mods){
-			if(md.supportVoice()){
+			if(md.supportVoice(game)){
 				ok.add(md);
 			}
 		}
@@ -718,8 +723,8 @@ public class SoundGuess {
 		int toGuessId=0;
 		int guessTime=0;
 		while(true){
-			toGuessId=r.nextInt(choose.getLimit())+1;
-			if(choose.isIdOk(toGuessId)){
+			toGuessId=r.nextInt(choose.getLimit(game))+1;
+			if(choose.isIdOk(game,toGuessId)){
 				break;
 			}else{
 				guessTime++;
@@ -736,7 +741,7 @@ public class SoundGuess {
 	public void graphGuess(){
 		ArrayList<Mod> ok=new ArrayList<>();
 		for(Mod md:MainLoader.mods){
-			if(md.supportPicture()){
+			if(md.supportPicture(game)){
 				ok.add(md);
 			}
 		}
@@ -753,8 +758,8 @@ public class SoundGuess {
 		int toGuessId=0;
 		int guessTime=0;
 		while(true){
-			toGuessId=r.nextInt(choose.getLimit())+1;
-			if(choose.isIdOk(toGuessId)){
+			toGuessId=r.nextInt(choose.getLimit(game))+1;
+			if(choose.isIdOk(game,toGuessId)){
 				break;
 			}else{
 				guessTime++;
@@ -784,7 +789,7 @@ public class SoundGuess {
 		
 		Thread t=new Thread(){
 			public void run() {
-				play.setIcon(new ImageIcon(mod.getPicture(guess)));
+				play.setIcon(new ImageIcon(mod.getPicture(game,guess)));
 				play.setText("");
 			};
 		};
@@ -815,7 +820,7 @@ public class SoundGuess {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				String ret=mod.isCorrect(guess, write.getText().trim());
+				String ret=mod.isCorrect(game,guess, write.getText().trim());
 				
 				if(ret.startsWith("C")){
 					
@@ -825,7 +830,7 @@ public class SoundGuess {
 						
 					}else{
 						String msg="The first time,you caught a "+write.getText()+"!\nYou get:";
-						Map<String,URL> get=mod.onAcquired(guess);
+						Map<String,URL> get=mod.onAcquired(game,guess);
 						
 						int lines=0;
 						
@@ -903,7 +908,7 @@ public class SoundGuess {
 								try{
 									
 									
-									InputStream is=mod.getMusic(guess).openStream();
+									InputStream is=mod.getMusic(game,guess).openStream();
 									player=new Player(is);
 									
 									play.setText("Play Sound");
@@ -965,7 +970,7 @@ public class SoundGuess {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				String ret=mod.isCorrect(guess, write.getText().trim());
+				String ret=mod.isCorrect(game,guess, write.getText().trim());
 				
 				if(ret.startsWith("C")){
 					
@@ -975,7 +980,7 @@ public class SoundGuess {
 						
 					}else{
 						String msg="The first time,you caught a "+write.getText()+"!\nYou get:";
-						Map<String,URL> get=mod.onAcquired(guess);
+						Map<String,URL> get=mod.onAcquired(game,guess);
 						
 						int lines=0;
 						

@@ -13,10 +13,16 @@ import java.util.Map;
 public abstract class Mod {
 	
 	/**
-	 * The build version your mod is using. It should match the game's version.
+	 * The build version your mod is using. It should match the game's version. <br/>
+	 * <b>This function should always return the same value!</b>
 	 */
 	public abstract int getBuildVersion();
 	
+	/**
+	 * Returns the mod name. <br/>
+	 * <b>This function should always return the same value!</b>
+	 * @return the mod name
+	 */
 	public abstract String getModName();
 	
 	/**
@@ -30,7 +36,7 @@ public abstract class Mod {
 	 * @param id
 	 * @return
 	 */
-	public abstract URL getMusic(int id);
+	public abstract URL getMusic(SoundGuess self,int id);
 	
 	
 	/**
@@ -39,21 +45,21 @@ public abstract class Mod {
 	 * @param id
 	 * @return
 	 */
-	public abstract URL getPicture(int id);
+	public abstract URL getPicture(SoundGuess self,int id);
 	
 	/**
 	 * This function is to check whether the given id is a valid id in your series.
 	 * @param id
 	 * @return
 	 */
-	public abstract boolean isIdOk(int id);
+	public abstract boolean isIdOk(SoundGuess self,int id);
 	
 	/**
 	 * This function is to return an integer to tell the game what is the r-boundary to generate next id <br/>
 	 * That's, the number will be chosen from [1,getLimit()]. <br/>
 	 * @return
 	 */
-	public abstract int getLimit();
+	public abstract int getLimit(SoundGuess self);
 	
 	/**
 	 * This function is called for a user successfully guessed the id creature <br/>
@@ -66,7 +72,7 @@ public abstract class Mod {
 	 * @param id
 	 * @return
 	 */
-	public abstract Map<String,URL> onAcquired(int id);
+	public abstract Map<String,URL> onAcquired(SoundGuess self,int id);
 	
 	/**
 	 * The user guessed the name, return whether it is right or not. <br/>
@@ -77,13 +83,15 @@ public abstract class Mod {
 	 * @param name
 	 * @return
 	 */
-	public abstract String isCorrect(int id,String name);
+	public abstract String isCorrect(SoundGuess self,int id,String name);
 	
-	public boolean supportVoice(){
+	public boolean supportVoice(SoundGuess self){
 		return true;
 	}
 	
-	public boolean supportPicture(){
+	public boolean supportPicture(SoundGuess self){
 		return true;
 	}
+	
+	
 }
