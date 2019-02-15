@@ -1058,7 +1058,7 @@ public class SoundGuess {
 				
 			}
 		});
-		
+		settings.add("South",open);
 		
 		settings.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		settings.setSize(250, 500);
