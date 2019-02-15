@@ -12,7 +12,6 @@ import java.util.Map;
  */
 public abstract class Mod {
 	
-	
 	public abstract String getModName();
 	
 	/**

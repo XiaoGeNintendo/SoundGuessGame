@@ -67,6 +67,12 @@ public class SoundGuess {
 	}
 	public void start(){
 		
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (Exception e){
+			System.out.println("Change look and feel error");
+		}
+		
 		File f=new File("mods");
 		if(!f.exists()){
 			f.mkdirs();
