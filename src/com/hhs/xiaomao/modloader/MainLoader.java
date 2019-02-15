@@ -12,6 +12,10 @@ import java.util.NoSuchElementException;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
+import javax.swing.JOptionPane;
+
+import com.hhs.xgn.soundguess.game.SoundGuess;
+
 /**
  * 
  * Main class of the mod loading system.All mods are loaded and initialised
@@ -140,7 +144,13 @@ public class MainLoader {
 
 				CurrentMod.init();
 				
-				mods.add(CurrentMod);
+				if(CurrentMod.getBuildVersion()!=SoundGuess.build){
+					System.out.println("Incorrect mod build version!");
+					JOptionPane.showMessageDialog(null, "The mod "+CurrentMod.getModName()+" doesn't match your game version!\nIt will be ignored");
+				}else{
+					mods.add(CurrentMod);
+				}
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

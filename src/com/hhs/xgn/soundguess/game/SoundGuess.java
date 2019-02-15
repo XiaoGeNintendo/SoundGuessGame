@@ -35,7 +35,7 @@ import javazoom.jl.player.Player;
 
 public class SoundGuess {
 	
-	public final static int build=2;
+	public final static int build=3;
 	
 	MenuBar menu;
 	Menu guess,inventory,setting,about;

@@ -12,6 +12,11 @@ import java.util.Map;
  */
 public abstract class Mod {
 	
+	/**
+	 * The build version your mod is using. It should match the game's version.
+	 */
+	public abstract int getBuildVersion();
+	
 	public abstract String getModName();
 	
 	/**
