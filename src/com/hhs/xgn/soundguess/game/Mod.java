@@ -93,5 +93,11 @@ public abstract class Mod {
 		return true;
 	}
 	
-	
+	/**
+	 * This function is called when "show detail" button was clicked
+	 * @param self
+	 */
+	public void openCustomMenu(SoundGuess self){
+		
+	}
 }

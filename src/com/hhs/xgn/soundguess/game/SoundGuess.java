@@ -35,7 +35,7 @@ import javazoom.jl.player.Player;
 
 public class SoundGuess {
 	
-	public final static int build=4;
+	public final static int build=5;
 	
 	MenuBar menu;
 	Menu guess,inventory,setting,about;
@@ -47,7 +47,7 @@ public class SoundGuess {
 	
 	JFrame win,loading;
 	
-	UserSave save;
+	public UserSave save;
 	
 	SoundGuess game;
 	
@@ -132,6 +132,7 @@ public class SoundGuess {
 			System.exit(1);
 		}
 	}
+	
 	public void saveData(){
 		try{
 			Gson gs=new Gson();
@@ -1027,6 +1028,8 @@ public class SoundGuess {
 	public void drawSetting(){
 		JFrame settings=new JFrame("Mods");
 		
+		settings.setLayout(new BorderLayout());
+		
 		JList<String> jl=new JList<>();
 		Vector<String> vec=new Vector<>();
 		
@@ -1035,9 +1038,27 @@ public class SoundGuess {
 		}
 		
 		jl.setListData(vec);
+		jl.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		JScrollPane jsp=new JScrollPane(jl);
-		settings.add(jsp);
+		settings.add("Center",jsp);
+		
+		
+		JButton open=new JButton("Show detail");
+		open.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(jl.isSelectionEmpty()){
+					msgBox("Select a mod to watch its detail","Warning");
+					return;
+				}
+				
+				MainLoader.mods.get(jl.getSelectedIndex()).openCustomMenu(game);
+				
+			}
+		});
+		
 		
 		settings.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		settings.setSize(250, 500);
