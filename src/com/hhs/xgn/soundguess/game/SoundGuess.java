@@ -51,6 +51,8 @@ public class SoundGuess {
 	
 	SoundGuess game;
 	
+//	Map<Mod,ArrayList<Integer>> possibleIds;
+	
 	public static void main(String[] args) {
 		SoundGuess g=new SoundGuess();
 		g.start();
@@ -105,6 +107,7 @@ public class SoundGuess {
 		drawLoading();
 		
 		MainLoader.load();
+		
 		loading.dispose();
 		
 		if(MainLoader.mods.size()==0){
@@ -475,7 +478,6 @@ public class SoundGuess {
 		url.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				// TODO Auto-generated method stub
 				if(al.player!=null){
 					al.player.close();
 				}
@@ -514,7 +516,6 @@ public class SoundGuess {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				if(!Desktop.isDesktopSupported()){
 					msgBox("Sorry. Your computer doesn't support opening :(","Sad");
 					return;
@@ -947,7 +948,6 @@ public class SoundGuess {
 		voice.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				// TODO Auto-generated method stub
 				if(al.player!=null){
 					al.player.close();
 				}
