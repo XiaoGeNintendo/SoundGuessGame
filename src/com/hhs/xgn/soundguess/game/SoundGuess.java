@@ -778,11 +778,12 @@ public class SoundGuess {
 		System.out.println("GuessId="+mod.getModName()+":"+guess);
 		JFrame voice=new JFrame("Picture Guess");
 		
-		voice.setLayout(new GridLayout(5, 1));
+		voice.setLayout(new BorderLayout());
 		voice.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
-		JLabel text=new JLabel("Watch and write its name!Resize the window if it isn't fully shown!");
-		voice.add(text);
+		JLabel text=new JLabel("Watch and write its name!");
+		voice.add("North",text);
+		
 		
 		JLabel play=new JLabel("Loading...");
 		play.setHorizontalAlignment(SwingConstants.CENTER);
@@ -797,16 +798,21 @@ public class SoundGuess {
 		t.start();
 		
 		JScrollPane jsp=new JScrollPane(play);
-		voice.add(jsp);
+		voice.add("Center",jsp);
 		
-		JTextField write=new JTextField("");
-		voice.add(write);
+		JPanel test=new JPanel(new GridLayout(3, 1));
+		
+		JTextField write=new JTextField("From "+mod.getModName());
+		
+		test.add(write);
 		
 		JButton yes=new JButton("Confirm!");
-		voice.add(yes);
+		test.add(yes);
 		
 		JButton no=new JButton("Cancel");
-		voice.add(no);
+		test.add(no);
+		
+		voice.add("South",test);
 		
 		no.addActionListener(new ActionListener() {
 			
@@ -949,7 +955,7 @@ public class SoundGuess {
 			}
 		});
 		
-		JTextField write=new JTextField("");
+		JTextField write=new JTextField("From "+mod.getModName());
 		voice.add(write);
 		
 		JButton yes=new JButton("Confirm!");
